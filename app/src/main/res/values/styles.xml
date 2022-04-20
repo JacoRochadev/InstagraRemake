@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //estilo do edit text
+
+    <style name="Theme.Instagram_R.FormContainer">
+        <item name="android:layout_marginStart">36dp</item>
+        <item name="android:layout_marginEnd">36dp</item>
+    </style>
+
+    <style name="Theme.Instagram_R.FormEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+    </style>
+
+    <style name="Theme.Instagram_R.FormEditTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">36dp</item>
+        <item name="android:layout_marginEnd">36dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    //estilo do botão
+
+    <style name="Theme.Instagram_R.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:color">@color/white</item>
+
+        <item name="android:layout_marginStart">36dp</item>
+        <item name="android:layout_marginEnd">36dp</item>
+
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+
+        <item name="backgroundTint">@color/button_background</item>
+    </style>
+
+    //
+
+    <style name="Theme.Instagram_R.TextViewBase" parent="Theme.Instagram_R.FormContainer">
+        <item name="android:textColor">@color/gray_text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Theme.Instagram_R.TextViewBase.Form">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginBottom">24dp</item>
+    </style>
+
+    <style name="Theme.Instagram_R.Link" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/blue_enabled</item>
+    </style>
+
+
+
+</resources>
