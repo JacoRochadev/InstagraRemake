@@ -6,32 +6,34 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.widget.Button
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.jacorocha.instagram_r.R
+import com.jacorocha.instagram_r.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val editTextEmail = findViewById<TextInputEditText>(R.id.login_edit_email)
-        val editTextPassword = findViewById<TextInputEditText>(R.id.login_edit_password)
+        binding.loginEditEmail.addTextChangedListener(watcher)
+        binding.loginEditPassword.addTextChangedListener(watcher)
 
-        editTextEmail.addTextChangedListener(watcher)
-        val buttonEnter = findViewById<LoadingButton>(R.id.login_btn_enter)
-
-        buttonEnter.setOnClickListener{
-            buttonEnter.showProgress(true)
-            findViewById<TextInputLayout>(R.id.login_edit_email_input)
+        binding.loginBtnEnter.setOnClickListener{
+            binding.loginBtnEnter.showProgress(true)
+            binding.loginEditEmailInput
                 .error = "Esse e-mail é inválido"
 
-            findViewById<TextInputLayout>(R.id.login_edit_password_input)
+            binding.loginEditPasswordInput
                 .error = "Senha incorreta"
 
             Handler(Looper.getMainLooper()).postDelayed({
-                buttonEnter.showProgress(false)
+                binding.loginBtnEnter.showProgress(false)
             }, 2000)
         }
     }
@@ -40,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            findViewById<LoadingButton>(R.id.login_btn_enter).isEnabled = p0.toString().isNotEmpty()
+            binding.loginBtnEnter.isEnabled = p0.toString().isNotEmpty()
         }
 
         override fun afterTextChanged(p0: Editable?) {

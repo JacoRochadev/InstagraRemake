@@ -7,18 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jacorocha.instagram_r.R
 import com.jacorocha.instagram_r.common.view.CustomDialog
+import com.jacorocha.instagram_r.databinding.FragmentRegisterPhotoBinding
 
-class RegisterPhotoFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_register_photo, container, false)
+class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
+
+    private var binding: FragmentRegisterPhotoBinding? = null
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentRegisterPhotoBinding.bind(view)
 
         val customDialog = CustomDialog(requireContext())
         customDialog.setTitle(R.string.app_name)
