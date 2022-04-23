@@ -21,6 +21,7 @@ import com.jacorocha.instagram_r.login.data.FakeDataSource
 import com.jacorocha.instagram_r.login.data.LoginRepository
 import com.jacorocha.instagram_r.login.presentation.LoginPresenter
 import com.jacorocha.instagram_r.main.view.MainActivity
+import com.jacorocha.instagram_r.register.view.RegisterActivity
 
 class LoginActivity : AppCompatActivity(), Login.View {
 
@@ -47,12 +48,17 @@ class LoginActivity : AppCompatActivity(), Login.View {
             //chamar o presenter
             presenter.login(binding.loginEditEmail.text.toString(), binding.loginEditPassword.text.toString())
         }
+        binding.loginTxtRegister.setOnClickListener {
+            goToRegisterScreen()
+        }
     }
 
-    override fun onDestroy() {
-        presenter.onDestroy()
-        super.onDestroy()
+    private fun goToRegisterScreen() {
+        startActivity(Intent(this, RegisterActivity::class.java))
+
     }
+
+
     private val watcher = TxtWatcher {
         binding.loginBtnEnter.isEnabled = binding.loginEditEmail.text.toString().isNotEmpty() && binding.loginEditPassword.text.toString().isNotEmpty()
     }
@@ -78,5 +84,9 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
     override fun onUserUnauthorized(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
     }
 }
