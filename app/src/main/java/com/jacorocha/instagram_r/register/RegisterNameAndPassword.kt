@@ -8,7 +8,7 @@ interface RegisterNameAndPassword {
 
     //camada presenter
     interface Presenter : BasePresenter {
-        fun create(name: String, password: String, confirm: String)
+        fun create(email: String, name: String, password: String, confirm: String)
     }
 
     //camada view

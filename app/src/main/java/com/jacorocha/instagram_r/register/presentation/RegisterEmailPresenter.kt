@@ -2,17 +2,13 @@ package com.jacorocha.instagram_r.register.presentation
 
 import android.util.Patterns
 import com.jacorocha.instagram_r.R
-import com.jacorocha.instagram_r.common.model.UserAuth
-import com.jacorocha.instagram_r.login.Login
-import com.jacorocha.instagram_r.login.data.LoginCallback
-import com.jacorocha.instagram_r.login.data.LoginRepository
 import com.jacorocha.instagram_r.register.RegisterEmail
-import com.jacorocha.instagram_r.register.data.RegisterEmailCallback
-import com.jacorocha.instagram_r.register.data.RegisterEmailRepository
+import com.jacorocha.instagram_r.register.data.RegisterCallback
+import com.jacorocha.instagram_r.register.data.RegisterRepository
 
 class RegisterEmailPresenter(
     private var view: RegisterEmail.View?,
-    private val repository: RegisterEmailRepository
+    private val repository: RegisterRepository
     ) : RegisterEmail.Presenter {
     override fun create(email: String) {
         val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -26,7 +22,7 @@ class RegisterEmailPresenter(
         if (isEmailValid){
             view?.showProgress(true)
 
-            repository.create(email, object : RegisterEmailCallback{
+            repository.create(email, object : RegisterCallback{
                 override fun onSuccess() {
                     view?.goToNameAndPasswordScreen(email)
                 }
