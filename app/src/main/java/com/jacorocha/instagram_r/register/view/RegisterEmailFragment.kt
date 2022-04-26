@@ -1,5 +1,6 @@
 package com.jacorocha.instagram_r.register.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.jacorocha.instagram_r.register.presentation.RegisterEmailPresenter
 
 class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), RegisterEmail.View {
     private var binding: FragmentRegisterEmailBinding? = null
+    private var fragmentAttachListener: FragmentAttachListener? = null
 
     override lateinit var presenter: RegisterEmail.Presenter
 
@@ -42,6 +44,14 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
             }
         }
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is FragmentAttachListener){
+            fragmentAttachListener = context
+        }
+    }
+
     private val watcher = TxtWatcher {
         binding?.registerBtnNext?.isEnabled = binding?.registerEditEmail?.text.toString().isNotEmpty()
     }
@@ -55,7 +65,7 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
     }
 
     override fun goToNameAndPasswordScreen(email: String) {
-        //depois
+        fragmentAttachListener?.goToNameAndPasswordScreen(email)
     }
 
     override fun displayEmailFailure(emailError: Int?) {
@@ -64,6 +74,7 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
 
     override fun onDestroy() {
         binding = null
+        fragmentAttachListener = null
         presenter.onDestroy()
         super.onDestroy()
     }
