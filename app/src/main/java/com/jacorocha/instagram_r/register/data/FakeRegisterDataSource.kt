@@ -25,10 +25,10 @@ class FakeRegisterDataSource : RegisterDataSource {
             val userAuth = Database.userAuth.firstOrNull { email == it.email }
 
             if(userAuth == null){
-                val created = Database.userAuth.add(
-                    UserAuth(UUID.randomUUID().toString().toString(), name, email, password)
-                )
+                val newUser = UserAuth(UUID.randomUUID().toString().toString(), name, email, password)
+                val created = Database.userAuth.add(newUser)
                 if(created){
+                    Database.sessionAuth = newUser
                     callback.onSuccess()
                 } else{
                     callback.onFailure("Erro no servidor")
