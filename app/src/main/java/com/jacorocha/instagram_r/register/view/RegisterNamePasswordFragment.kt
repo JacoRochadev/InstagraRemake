@@ -1,5 +1,6 @@
 package com.jacorocha.instagram_r.register.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -13,8 +14,8 @@ import com.jacorocha.instagram_r.register.presentation.RegisterNameAndPasswordPr
 import java.lang.IllegalArgumentException
 
 class RegisterNamePasswordFragment : Fragment(R.layout.fragment_register_name_password), RegisterNameAndPassword.View {
-
     private var binding: FragmentRegisterNamePasswordBinding? = null
+    private var fragmentAttachListener: FragmentAttachListener? = null
 
     override lateinit var presenter: RegisterNameAndPassword.Presenter
 
@@ -56,6 +57,12 @@ class RegisterNamePasswordFragment : Fragment(R.layout.fragment_register_name_pa
         }
 
     }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is FragmentAttachListener){
+            fragmentAttachListener = context
+        }
+    }
 
     private val watcher = TxtWatcher {
         binding?.registerNameBtnNext?.isEnabled = binding?.registerEditName?.text.toString().isNotEmpty()
@@ -81,7 +88,7 @@ class RegisterNamePasswordFragment : Fragment(R.layout.fragment_register_name_pa
     }
 
     override fun onCreateSuccess(name: String) {
-        //TODO: abrir a tela de bem vindo
+        fragmentAttachListener?.goToWelcomeScreen(name)
     }
 
     override fun onCreateFailure(message: String) {

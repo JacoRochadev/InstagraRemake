@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.jacorocha.instagram_r.R
 import com.jacorocha.instagram_r.databinding.ActivityRegisterBinding
 import com.jacorocha.instagram_r.register.view.RegisterNamePasswordFragment.Companion.KEY_EMAIL
+import com.jacorocha.instagram_r.register.view.RegisterWelcomeFragment.Companion.KEY_NAME
 
 class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
 
@@ -33,6 +34,21 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
         }
         replaceFragment(fragment)
     }
+
+    override fun goToWelcomeScreen(name: String) {
+        val fragment = RegisterWelcomeFragment().apply {
+            arguments = Bundle().apply {
+                putString(KEY_NAME, name)
+            }
+        }
+        replaceFragment(fragment)
+    }
+
+    override fun goToPhotoScreen() {
+        val fragment = RegisterPhotoFragment()
+        replaceFragment(fragment)
+    }
+
     private fun replaceFragment(fragment: Fragment){
         if(supportFragmentManager.findFragmentById(R.id.register_fragment) == null){
             supportFragmentManager.beginTransaction().apply {
