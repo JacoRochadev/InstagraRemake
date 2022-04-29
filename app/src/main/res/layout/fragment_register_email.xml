@@ -41,7 +41,7 @@
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.jacorocha.instagram_r.login.view.LoadingButton
+            <com.jacorocha.instagram_r.common.view.LoadingButton
                 android:id="@+id/register_btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

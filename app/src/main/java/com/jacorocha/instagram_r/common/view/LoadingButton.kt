@@ -1,4 +1,4 @@
-package com.jacorocha.instagram_r.login.view
+package com.jacorocha.instagram_r.common.view
 
 import android.content.Context
 import android.util.AttributeSet
