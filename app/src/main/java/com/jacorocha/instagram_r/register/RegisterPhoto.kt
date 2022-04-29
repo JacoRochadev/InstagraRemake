@@ -15,7 +15,7 @@ interface RegisterPhoto {
     //camada view
     interface View : BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
-        fun onUpdateSuccess(name: String)
-        fun onUpdateFailure()
+        fun onUpdateSuccess()
+        fun onUpdateFailure(message: String)
     }
 }

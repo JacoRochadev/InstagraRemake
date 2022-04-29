@@ -9,16 +9,21 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.jacorocha.instagram_r.R
+import com.jacorocha.instagram_r.common.base.DependencyInjector
 import com.jacorocha.instagram_r.common.view.CropperImageFragment
 import com.jacorocha.instagram_r.common.view.CustomDialog
 import com.jacorocha.instagram_r.databinding.FragmentRegisterPhotoBinding
+import com.jacorocha.instagram_r.register.RegisterPhoto
+import com.jacorocha.instagram_r.register.presentation.RegisterPhotoPresenter
 
-class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
+class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), RegisterPhoto.View {
     private var binding: FragmentRegisterPhotoBinding? = null
     private var fragmentAttachListener: FragmentAttachListener? = null
+    override lateinit var presenter: RegisterPhoto.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +44,15 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
                 MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
             }
             binding?.registerImgProfile?.setImageBitmap(bitmap)
+            presenter.updateUser(uri)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterPhotoBinding.bind(view)
+        val repository = DependencyInjector.registerEmailRepository()
+        presenter = RegisterPhotoPresenter(this, repository)
 
         binding?.let {
             with(it){
@@ -77,6 +85,7 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
 
     override fun onDestroy() {
         binding = null
+        presenter.onDestroy()
         super.onDestroy()
     }
 
@@ -85,5 +94,17 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
         if (context is FragmentAttachListener){
             fragmentAttachListener = context
         }
+    }
+
+    override fun showProgress(enabled: Boolean) {
+        binding?.registerBtnNext?.showProgress(enabled)
+    }
+
+    override fun onUpdateSuccess() {
+        fragmentAttachListener?.goToMainScreen()
+    }
+
+    override fun onUpdateFailure(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }
