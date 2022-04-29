@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.jacorocha.instagram_r.R
@@ -44,6 +45,7 @@ class CustomDialog(context: Context) : Dialog(context){
     }
 
     override fun show() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.show()
         titleId?.let {
             binding.dialogTitle.setText(it)

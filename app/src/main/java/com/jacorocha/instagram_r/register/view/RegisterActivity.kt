@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.jacorocha.instagram_r.R
+import com.jacorocha.instagram_r.common.extension.hideKeyboard
 import com.jacorocha.instagram_r.common.view.CropperImageFragment
 import com.jacorocha.instagram_r.common.view.CropperImageFragment.Companion.KEY_URI
 import com.jacorocha.instagram_r.databinding.ActivityRegisterBinding
@@ -58,6 +59,7 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
             }
         }
         replaceFragment(fragment)
+
     }
 
     override fun goToPhotoScreen() {
@@ -126,6 +128,7 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
                 commit()
             }
         }
+        hideKeyboard()
     }
 
     private fun openImageCropper(uri: Uri){
