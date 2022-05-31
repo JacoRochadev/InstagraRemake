@@ -22,6 +22,6 @@
 
     <item
         android:id="@+id/menu_bottom_profile"
-        android:icon="@drawable/ic_insta_profile"
+        android:icon="@drawable/ic_baseline_person_outline_24"
         android:title="@null"/>
 </menu>

@@ -10,7 +10,7 @@
         android:id="@+id/search_img_user"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/ic_insta_profile_thin"
+        android:src="@drawable/ic_insta_profile"
         app:civ_border_color="@color/gray_border"
         app:civ_border_width="1dp"
         app:civ_circle_background_color="@color/white"
